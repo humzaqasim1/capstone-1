@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 public class Transactions {
+    // Declaring variables to be used
     LocalDate date;
     LocalTime time;
     private String details;
