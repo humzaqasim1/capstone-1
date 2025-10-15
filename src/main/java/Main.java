@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
-    //    FileReader fileReader = new FileReader("src/main/resources/transactions.csv");
-//    BufferedReader bufferedReader = new BufferedReader(fileReader);
+    //FileReader fileReader = new FileReader("src/main/resources/transactions.csv");
+    BufferedReader bufferedReader = new BufferedReader(fileReader);
     public static void main(String[] args) {
 
 
