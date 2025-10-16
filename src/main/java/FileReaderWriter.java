@@ -6,7 +6,6 @@ import java.util.List;
 
 public class FileReaderWriter {
     // File reader
-//    private String fileName = "src/main/resources/transactions.csv";
     private String fileName = "src/main/resources/transactions.csv";
 
     public FileReaderWriter() {

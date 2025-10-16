@@ -8,17 +8,6 @@ public class Ledger {
 //    ArrayList<Transactions> transactions = fileReaderWriter.getTransactions();
     private Scanner scanner = new Scanner(System.in);
 
-//    public Ledger(List<Transactions> transactions) {
-//        this.transactions = new ArrayList<>(transactions);
-//        this.fileReaderWriter = new FileReaderWriter();
-//    }
-
-//    public Ledger() {
-//    transactions = fileReaderWriter.getTransactions();
-
-//    public void setTransactions(List<Transactions> transactions) {
-//        this.transactions = transactions;
-//    }
 
     public void displayLedgerScreen() {
 //        this.transactions = fileReaderWriter.getTransactions();
@@ -40,7 +29,7 @@ public class Ledger {
                     break;
                 case "D":
                     System.out.println("Displaying Only Deposits: ");
-//                    sortLedger(choice);
+                    sortLedger(choice);
                     break;
                 case "P":
                     System.out.println("Displaying Only Payments: ");
