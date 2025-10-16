@@ -3,25 +3,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ledger {
-    private List<Transactions> transactions;
+//    private HomeScreen homeScreen = new HomeScreen();
+    FileReaderWriter fileReaderWriter = new FileReaderWriter();
+//    ArrayList<Transactions> transactions = fileReaderWriter.getTransactions();
     private Scanner scanner = new Scanner(System.in);
-    private FileReaderWriter fileReaderWriter;
-    public Ledger(List<Transactions> transactions) {
-        this.transactions = new ArrayList<>(transactions);
+
+//    public Ledger(List<Transactions> transactions) {
+//        this.transactions = new ArrayList<>(transactions);
 //        this.fileReaderWriter = new FileReaderWriter();
-    }
+//    }
 
-    public Ledger() {
-    }
+//    public Ledger() {
+//    transactions = fileReaderWriter.getTransactions();
 
-    public void setTransactions(List<Transactions> transactions) {
-        this.transactions = transactions;
-    }
+//    public void setTransactions(List<Transactions> transactions) {
+//        this.transactions = transactions;
+//    }
 
     public void displayLedgerScreen() {
-        this.transactions = fileReaderWriter.getTransactions();
+//        this.transactions = fileReaderWriter.getTransactions();
         boolean running = true;
         while (running) {
+
             System.out.println("Choose an Option: ");
             System.out.println("A: All - Display All Entries");
             System.out.println("D: Deposits - Display Only Deposits");
@@ -37,6 +40,7 @@ public class Ledger {
                     break;
                 case "D":
                     System.out.println("Displaying Only Deposits: ");
+//                    sortLedger(choice);
                     break;
                 case "P":
                     System.out.println("Displaying Only Payments: ");
@@ -55,10 +59,16 @@ public class Ledger {
     }
 
     public void sortLedger(String choice) {
+        ArrayList<Transactions> transactions = fileReaderWriter.getTransactions();
         boolean match = false;
-        for (Transactions transaction : this.transactions) {
-            if (choice == "A"){
+        for (Transactions transaction : transactions) {
+            if (choice.equals("A")){
                 match = true;
+            }
+            else if (choice.equals("D")){
+                if (transaction.getAmount()>0){
+                    match = true;
+                }
             }
             if (match){
                 System.out.println(transaction.toString());

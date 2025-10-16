@@ -26,7 +26,7 @@ public class Transactions implements Comparable<Transactions> {
     public Double getAmount() {return amount;}
     public void setAmount(Double amount) {this.amount = amount;}
 
-    public Boolean isDeposit(){
+    public boolean isDeposit(){
         return amount > 0;
     }
     public boolean isPayment(){

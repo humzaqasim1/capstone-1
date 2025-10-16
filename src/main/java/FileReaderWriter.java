@@ -34,7 +34,6 @@ public class FileReaderWriter {
                 Transactions transaction = new Transactions(date, time, details, vendor, amount);
                 if (!line.trim().isEmpty()) {
                     transactions.add(transaction);
-                    System.out.println("Adding Transaction");
                 }
 
             }
