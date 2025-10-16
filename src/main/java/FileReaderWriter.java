@@ -6,20 +6,15 @@ import java.util.List;
 
 public class FileReaderWriter {
     // File reader
+//    private String fileName = "src/main/resources/transactions.csv";
     private String fileName = "src/main/resources/transactions.csv";
-    private ArrayList<Transactions> transactions = new ArrayList<>();
-    // Converting input into list then array list
-
 
     public FileReaderWriter() {
-        readTransactions();
     }
 
-    public ArrayList<Transactions> getTransactions() {
-        return transactions;
-    }
 
-    public void readTransactions() {
+    public ArrayList<Transactions> readTransactions() {
+        ArrayList<Transactions> transactions = new ArrayList<Transactions>();
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -38,10 +33,11 @@ public class FileReaderWriter {
 
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Transaction not found");
+            System.out.println("Transaction file not found: " + fileName );
         } catch (IOException e) {
             System.out.println("Error" + e.getMessage());
         }
+        return transactions;
     }
 
     // File writer

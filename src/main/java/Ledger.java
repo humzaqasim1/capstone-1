@@ -59,9 +59,9 @@ public class Ledger {
     }
 
     public void sortLedger(String choice) {
-        ArrayList<Transactions> transactions = fileReaderWriter.getTransactions();
+
         boolean match = false;
-        for (Transactions transaction : transactions) {
+        for (Transactions transaction : Main.transactions) {
             if (choice.equals("A")){
                 match = true;
             }

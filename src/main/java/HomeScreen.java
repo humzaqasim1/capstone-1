@@ -54,6 +54,7 @@ public class HomeScreen {
             System.out.println("Enter Deposit Details: ");
             //public Transactions(LocalDate date, LocalTime time, String details, String vendor, Double amount)
             Transactions transactions = getTransactionsInfo(true);
+            Main.transactions.add(transactions);
             fileReaderWriter.writeTransactions(transactions);
             System.out.println("Adding Deposit...");
             entries.add(transactions);
@@ -64,6 +65,7 @@ public class HomeScreen {
         FileReaderWriter fileReaderWriter = new FileReaderWriter();
         System.out.println("Make Payment\n");
         Transactions transactions = getTransactionsInfo(false);
+        Main.transactions.add(transactions);
         fileReaderWriter.writeTransactions(transactions);
         System.out.println("Making Payment...");
         entries.add(transactions);
