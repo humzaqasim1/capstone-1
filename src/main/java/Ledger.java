@@ -3,12 +3,15 @@ import java.util.Scanner;
 
 public class Ledger {
     private List<Transactions> transactions;
-    private Scanner scanner;
-
+    private Scanner scanner = new Scanner(System.in);
     public Ledger(List <Transactions> transactions){
         this.transactions = transactions;
-        this.scanner = new Scanner(System.in);
+
     }
+
+    public Ledger() {
+    }
+
     public void displayLedgerScreen(){
         System.out.println("Choose an Option: ");
         System.out.println("A: All - Display All Entries");
@@ -35,7 +38,3 @@ public class Ledger {
 
     }
 }
-//private void displayAllEntries(){
-//    System.out.println("All Entries:\n");
-
-//private

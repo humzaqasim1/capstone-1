@@ -28,7 +28,7 @@ public class FileReaderWriter {
     }
     // File writer
     public void writeTransactions (Transactions transactions){
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))){
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))){
             bufferedWriter.write(transactions.toString());
             bufferedWriter.newLine();
         } catch (IOException ex) {

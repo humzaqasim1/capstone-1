@@ -10,7 +10,7 @@ public class HomeScreen {
     // Creating home screen options
     public static void display() {
         Scanner scanner = new Scanner(System.in);
-
+        Ledger ledger = new Ledger();
         while (true) {
             System.out.println("\nWelcome to the Home Screen\n");
             System.out.println("Choose an Option: ");
@@ -27,6 +27,7 @@ public class HomeScreen {
                     makePayment();
                     break;
                 case "L":
+                    ledger.displayLedgerScreen();
                     break;
                 case "X":
                     System.out.println("Exiting Application");
@@ -83,6 +84,5 @@ public class HomeScreen {
             return null;
         }
     }
-
 }
 
