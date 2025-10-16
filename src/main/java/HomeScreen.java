@@ -6,11 +6,11 @@ import java.util.List;
 
 public class HomeScreen {
     ArrayList<Transactions> entries = new ArrayList<>();
-
+    Scanner scanner = new Scanner(System.in);
+    Ledger ledger = new Ledger();
     // Creating home screen options
-    public static void display() {
-        Scanner scanner = new Scanner(System.in);
-        Ledger ledger = new Ledger();
+    public void display() {
+
         while (true) {
             System.out.println("\nWelcome to the Home Screen\n");
             System.out.println("Choose an Option: ");

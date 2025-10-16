@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 public class Main {
     public static void main(String[] args) {
-        HomeScreen.display();
+        HomeScreen homeScreen = new HomeScreen();
+        homeScreen.display();
+
     }
 }

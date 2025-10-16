@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-public class Transactions {
+public class Transactions implements Comparable<Transactions> {
     // Declaring variables to be used
     LocalDate date;
     LocalTime time;
@@ -34,7 +34,7 @@ public class Transactions {
     }
     // formatting output
     public String toString(){
-        return String.format("%s | %s | %s | %s | %.2f", date, time, details, vendor, amount);
+        return String.format("%s|%s|%s|%s|%.2f", date, time, details, vendor, amount);
     }
     // array formatting
     public static Transactions fromString(String line){
@@ -45,6 +45,11 @@ public class Transactions {
         String vendor = parts[3];
         Double amount = Double.parseDouble(parts[4]);
         return new Transactions(date, time, details, vendor, amount);
+    }
+
+    @Override
+    public int compareTo(Transactions otherTransactions) {
+        return this.details.compareTo(otherTransactions.getDetails());
     }
 
 }
