@@ -10,7 +10,9 @@ public class Main {
     static ArrayList<Transactions> transactions = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     public static String fileName = "src/main/resources/transactions.csv";
+
     public static void main(String[] args) {
+        readTransactions();
         displayHomeScreen();
 
     }
@@ -126,10 +128,12 @@ public class Main {
     }
 
     private static void displayAllEntries() {
-        System.out.println(transactions);
+        for (Transactions t : transactions) {
+            System.out.println(t);
+        }
     }
 
-    public static void readTransactions(ArrayList<Transactions> transactions) {
+    public static void readTransactions() {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line;
             // Making sure string is not empty
@@ -141,9 +145,7 @@ public class Main {
                 String vendor = parts[3];
                 Double amount = Double.parseDouble(parts[4]);
                 Transactions transaction = new Transactions(date, time, details, vendor, amount);
-                if (!line.trim().isEmpty()) {
-
-                }
+                transactions.add(transaction);
 
             }
         } catch (FileNotFoundException e) {
