@@ -5,22 +5,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     static ArrayList<Transactions> transactions = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
-
+    public static String fileName = "src/main/resources/transactions.csv";
     public static void main(String[] args) {
-        FileReaderWriter readerWriter = new FileReaderWriter();
-        transactions = readerWriter.readTransactions();
-        HomeScreen homeScreen = new HomeScreen();
         displayHomeScreen();
 
     }
 
     public static void displayHomeScreen() {
-//        this.entries = fileReaderWriter.getTransactions();
         while (true) {
             System.out.println("\nWelcome to the Home Screen\n");
             System.out.println("Choose an Option: ");
@@ -37,7 +32,7 @@ public class Main {
                     makePayment();
                     break;
                 case "L":
-                    ledger.displayLedgerScreen();
+                    displayLedgerScreen();
                     break;
                 case "X":
                     System.out.println("Exiting Application");
@@ -49,26 +44,21 @@ public class Main {
     }
 
     public static void addDeposit() {
-        FileReaderWriter fileReaderWriter = new FileReaderWriter();
         System.out.println("Add New Deposit\n");
-        System.out.println("Enter Deposit Details: ");
-        //public Transactions(LocalDate date, LocalTime time, String details, String vendor, Double amount)
         Transactions transactions = getTransactionsInfo(true);
         Main.transactions.add(transactions);
-        fileReaderWriter.writeTransactions(transactions);
+        writeTransactions(transactions);
         System.out.println("Adding Deposit...");
-        transactions.add(transactions);
+
 
     }
 
     public static void makePayment() {
-        FileReaderWriter fileReaderWriter = new FileReaderWriter();
         System.out.println("Make Payment\n");
         Transactions transactions = getTransactionsInfo(false);
         Main.transactions.add(transactions);
-        fileReaderWriter.writeTransactions(transactions);
+        writeTransactions(transactions);
         System.out.println("Making Payment...");
-        entries.add(transactions);
     }
 
     public static Transactions getTransactionsInfo(boolean isDeposit) {
@@ -97,6 +87,7 @@ public class Main {
             return null;
         }
     }
+
     public static void displayLedgerScreen() {
 //        this.transactions = fileReaderWriter.getTransactions();
         boolean running = true;
@@ -112,12 +103,11 @@ public class Main {
             String choice = scanner.nextLine().trim().toUpperCase();
             switch (choice) {
                 case "A":
+                    displayAllEntries();
                     System.out.println("Displaying All Entries: ");
-                    sortLedger(choice);
                     break;
                 case "D":
                     System.out.println("Displaying Only Deposits: ");
-                    sortLedger(choice);
                     break;
                 case "P":
                     System.out.println("Displaying Only Payments: ");
@@ -134,9 +124,12 @@ public class Main {
         }
 
     }
-    public static ArrayList<Transactions> readTransactions() {
-        ArrayList<Transactions> transactions = new ArrayList<Transactions>();
 
+    private static void displayAllEntries() {
+        System.out.println(transactions);
+    }
+
+    public static void readTransactions(ArrayList<Transactions> transactions) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line;
             // Making sure string is not empty
@@ -149,16 +142,23 @@ public class Main {
                 Double amount = Double.parseDouble(parts[4]);
                 Transactions transaction = new Transactions(date, time, details, vendor, amount);
                 if (!line.trim().isEmpty()) {
-                    transactions.add(transaction);
+
                 }
 
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Transaction file not found: " + fileName );
+            System.out.println("Transaction file not found: " + fileName);
         } catch (IOException e) {
             System.out.println("Error" + e.getMessage());
         }
-        return transactions;
     }
-}
+    public static void writeTransactions(Transactions transactions) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
+            bufferedWriter.write(transactions.toString());
+            bufferedWriter.newLine();
+        } catch (IOException ex) {
+            System.out.println("Error" + ex.getMessage());
+        }
+    }
 
+}

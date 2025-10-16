@@ -37,7 +37,7 @@ public class Transactions implements Comparable<Transactions> {
         return String.format("%s|%s|%s|%s|%.2f", date, time, details, vendor, amount);
     }
     // array formatting
-    public static Transactions fromString(String line){
+    public static Transactions toString(String line){
         String [] parts = line.split("\\|");
         LocalDate date = LocalDate.parse(parts[0]);
         LocalTime time = LocalTime.parse(parts[1]);
