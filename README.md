@@ -2,6 +2,7 @@
 
 A Java Command Line Application for tracking financial transactions
 
+by Humza Qasim
 ## **Features**
 
 - Add deposits and payments with automatic time/date stamping

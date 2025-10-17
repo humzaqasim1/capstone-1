@@ -10,12 +10,10 @@ public class Main {
     static ArrayList<Transactions> transactions = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     public static String fileName = "src/main/resources/transactions.csv";
-    boolean hasTransactions = false;
 
     public static void main(String[] args) {
         readTransactions();
         displayHomeScreen();
-
     }
 
     public static void displayHomeScreen() {
@@ -52,8 +50,6 @@ public class Main {
         Main.transactions.add(transactions);
         writeTransactions(transactions);
         System.out.println("Adding Deposit...");
-
-
     }
 
     public static void makePayment() {
@@ -212,7 +208,6 @@ public class Main {
                 Double amount = Double.parseDouble(parts[4]);
                 Transactions transaction = new Transactions(date, time, details, vendor, amount);
                 transactions.add(transaction);
-
             }
         } catch (FileNotFoundException e) {
             System.out.println("Transaction file not found: " + fileName);
