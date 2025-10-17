@@ -134,30 +134,67 @@ public class Main {
 
     private static void displayOnlyDeposits() {
         System.out.println("Deposits: \n");
-        boolean hasDeposits = false;
+        ArrayList<Transactions> deposits = new ArrayList<>();
+
         for (Transactions t : transactions) {
             if (t.getAmount() > 0) {
-                hasDeposits = true;
-                System.out.println(t);
+                deposits.add(t);
             }
 
+        }
+        deposits.sort((t1,t2) -> {
+            int dateCompare = t2.getDate().compareTo(t1.getDate());
+            if (dateCompare != 0) {
+                return dateCompare;
+            }
+            return t2.getTime().compareTo(t1.getTime());
+        });
+        if (deposits.isEmpty()) {
+            System.out.println("No Deposits Found");
+        } else {
+            for (Transactions t : deposits) {
+                System.out.println(t);
+            }
         }
     }
 
     private static void displayOnlyPayments() {
         System.out.println("Payments: \n");
-        boolean hasPayments = false;
+        ArrayList<Transactions> payments = new ArrayList<>();
+
         for (Transactions t : transactions) {
             if (t.getAmount() < 0) {
-                hasPayments = true;
-                System.out.println(t);
+                payments.add(t);
             }
 
+        }
+
+        payments.sort((t1, t2) -> {
+            int dateCompare = t2.getDate().compareTo(t1.getDate());
+            if (dateCompare != 0) {
+                return dateCompare;
+            }
+            return t2.getTime().compareTo(t1.getTime());
+        });
+        if (payments.isEmpty()) {
+            System.out.println("No Payments Found");
+        } else {
+            for (Transactions t : payments) {
+                System.out.println(t);
+            }
         }
     }
 
     private static void displayAllEntries() {
-        for (Transactions t : transactions) {
+        ArrayList<Transactions> sortedTransactions = new ArrayList<>(transactions);
+        sortedTransactions.sort((t1, t2) -> {
+            int dateCompare = t2.getDate().compareTo(t1.getDate());
+            if (dateCompare != 0) {
+                return dateCompare;
+            }
+            return t2.getTime().compareTo(t1.getTime());
+        });
+        for (Transactions t : sortedTransactions) {
             System.out.println(t);
         }
     }
@@ -258,13 +295,27 @@ public class Main {
     private static void displayYearToDate() {
         System.out.println("Year to Date: ");
         LocalDate now = LocalDate.now();
-        boolean hasTransactions = false;
+        ArrayList<Transactions> yearTransactions = new ArrayList<>();
+
         for (Transactions t : transactions) {
             if (t.getDate().getYear() == now.getYear()) {
-                hasTransactions = true;
-                System.out.println(t);
+                yearTransactions.add(t);
             }
         }
+        yearTransactions.sort((t1, t2) -> {
+            int dateCompare = t2.getDate().compareTo(t1.getDate());
+            if (dateCompare != 0) {
+                return dateCompare;
+            }
+            return t2.getTime().compareTo(t1.getTime());
+        });
+            if (yearTransactions.isEmpty()) {
+                System.out.println("No Transactions Found for this Year");
+            } else {
+                for (Transactions t : yearTransactions) {
+                    System.out.println(t);
+                }
+            }
     }
     private static void displayPreviousYear() {
         System.out.println("Previous Year: ");
