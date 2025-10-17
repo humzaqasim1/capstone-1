@@ -10,6 +10,7 @@ public class Main {
     static ArrayList<Transactions> transactions = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     public static String fileName = "src/main/resources/transactions.csv";
+    boolean hasTransactions = false;
 
     public static void main(String[] args) {
         readTransactions();
@@ -94,7 +95,7 @@ public class Main {
 //        this.transactions = fileReaderWriter.getTransactions();
         boolean running = true;
         while (running) {
-
+            System.out.println("\nWelcome to the Ledger Screen\n");
             System.out.println("Choose an Option: ");
             System.out.println("A: All - Display All Entries");
             System.out.println("D: Deposits - Display Only Deposits");
@@ -109,12 +110,15 @@ public class Main {
                     System.out.println("Displaying All Entries: ");
                     break;
                 case "D":
+                    displayOnlyDeposits();
                     System.out.println("Displaying Only Deposits: ");
                     break;
                 case "P":
+                    displayOnlyPayments();
                     System.out.println("Displaying Only Payments: ");
                     break;
                 case "R":
+                    displayReportScreen();
                     System.out.println("Displaying Report Screen: ");
                     break;
                 case "H":
@@ -125,6 +129,31 @@ public class Main {
             }
         }
 
+    }
+
+
+    private static void displayOnlyDeposits() {
+        System.out.println("Deposits: \n");
+        boolean hasDeposits = false;
+        for (Transactions t : transactions) {
+            if (t.getAmount() > 0) {
+                hasDeposits = true;
+                System.out.println(t);
+            }
+
+        }
+    }
+
+    private static void displayOnlyPayments() {
+        System.out.println("Payments: \n");
+        boolean hasPayments = false;
+        for (Transactions t : transactions) {
+            if (t.getAmount() < 0) {
+                hasPayments = true;
+                System.out.println(t);
+            }
+
+        }
     }
 
     private static void displayAllEntries() {
@@ -154,6 +183,7 @@ public class Main {
             System.out.println("Error" + e.getMessage());
         }
     }
+
     public static void writeTransactions(Transactions transactions) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
             bufferedWriter.write(transactions.toString());
@@ -163,4 +193,68 @@ public class Main {
         }
     }
 
+    public static void displayReportScreen() {
+        boolean running = true;
+        while (running) {
+            System.out.println("\nWelcome to the Report Screen\n");
+            System.out.println("Choose an Option: ");
+            System.out.println("1: Month to Date");
+            System.out.println("2: Previous Month");
+            System.out.println("3: Year to Date");
+            System.out.println("4: Previous Year");
+            System.out.println("5: Search by Vendor:");
+            System.out.println("0: Back");
+
+            String choice = scanner.nextLine().trim();
+            switch (choice) {
+                case "1":
+                    displayMonthToDate();
+                    break;
+                case "2":
+                    displayPreviousMonth();
+                    break;
+                case "3":
+                    displayYearToDate();
+                    break;
+                case "4":
+//                    displayPreviousYear();
+                    break;
+                case "5":
+//                    searchByVendor();
+                    break;
+                case "0":
+                    return;
+                default:
+                    System.out.println("Invalid Choice");
+            }
+        }
+    }
+
+    private static void displayMonthToDate() {
+        System.out.println("Month to Date: ");
+        LocalDate now = LocalDate.now();
+        boolean hasTransactions = false;
+        for (Transactions t : transactions) {
+            if (t.getDate().getYear() == now.getYear() && t.getDate().getMonth() == now.getMonth()) {
+                hasTransactions = true;
+                System.out.println(t);
+            }
+        }
+    }
+
+    private static void displayPreviousMonth() {
+        System.out.println("Previous Month: ");
+        LocalDate previousMonth = LocalDate.now().minusMonths(1);
+        boolean hasTransactions = false;
+        for (Transactions t : transactions) {
+            if (t.getDate().getYear() == previousMonth.getYear() && t.getDate().getMonth() == previousMonth.getMonth()) {
+                hasTransactions = true;
+                System.out.println(t);
+            }
+        }
+
+
+    }
+    private static void displayYearToDate() {
+    }
 }
