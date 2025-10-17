@@ -217,10 +217,10 @@ public class Main {
                     displayYearToDate();
                     break;
                 case "4":
-//                    displayPreviousYear();
+                    displayPreviousYear();
                     break;
                 case "5":
-//                    searchByVendor();
+                    searchByVendor();
                     break;
                 case "0":
                     return;
@@ -256,5 +256,37 @@ public class Main {
 
     }
     private static void displayYearToDate() {
+        System.out.println("Year to Date: ");
+        LocalDate now = LocalDate.now();
+        boolean hasTransactions = false;
+        for (Transactions t : transactions) {
+            if (t.getDate().getYear() == now.getYear()) {
+                hasTransactions = true;
+                System.out.println(t);
+            }
+        }
+    }
+    private static void displayPreviousYear() {
+        System.out.println("Previous Year: ");
+        int previousYear = LocalDate.now().getYear() - 1;
+        boolean hasTransactions = false;
+        for (Transactions t : transactions) {
+            if (t.getDate().getYear() == previousYear) {
+                hasTransactions = true;
+                System.out.println(t);
+            }
+        }
+
+    }
+    private static void searchByVendor() {
+        System.out.println("Enter Vendor Name: ");
+        String vendorName = scanner.nextLine().trim();
+        boolean hasTransactions = false;
+        for (Transactions t : transactions) {
+            if (t.getVendor().equalsIgnoreCase(vendorName)) {
+                hasTransactions = true;
+                System.out.println(t);
+            }
+        }
     }
 }
