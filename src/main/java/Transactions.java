@@ -26,12 +26,6 @@ public class Transactions implements Comparable<Transactions> {
     public Double getAmount() {return amount;}
     public void setAmount(Double amount) {this.amount = amount;}
 
-    public boolean isDeposit(){
-        return amount > 0;
-    }
-    public boolean isPayment(){
-        return amount < 0;
-    }
     // formatting output
     public String toString(){
         return String.format("%s|%s|%s|%s|%.2f", date, time, details, vendor, amount);
@@ -49,7 +43,7 @@ public class Transactions implements Comparable<Transactions> {
 
     @Override
     public int compareTo(Transactions otherTransactions) {
-        return this.details.compareTo(otherTransactions.getDetails());
+        return this.date.compareTo(otherTransactions.getDate());
     }
 
 }
